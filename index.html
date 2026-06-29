@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Chaimaa ❤️</title>
+
+<!-- Confetti Library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+overflow:hidden;
+background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+/* Floating Hearts */
+
+.hearts{
+position:fixed;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:-1;
+}
+
+.hearts span{
+position:absolute;
+bottom:-50px;
+font-size:22px;
+animation:float linear infinite;
+opacity:.8;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(0) scale(1);
+opacity:0;
+}
+
+20%{
+opacity:1;
+}
+
+100%{
+transform:translateY(-110vh) scale(1.5);
+opacity:0;
+}
+
+}
+
+.container{
+
+background:white;
+padding:35px;
+width:90%;
+max-width:650px;
+border-radius:25px;
+box-shadow:0 10px 35px rgba(0,0,0,.2);
+text-align:center;
+position:relative;
+
+}
+
+h1{
+color:#ff3d6d;
+margin-bottom:10px;
+}
+
+p{
+color:#555;
+margin-bottom:20px;
+}
+
+button{
+padding:14px 28px;
+border:none;
+border-radius:40px;
+font-size:18px;
+cursor:pointer;
+transition:.3s;
+}
+
+#yes{
+background:#ff3d6d;
+color:white;
+}
+
+#no{
+background:#999;
+color:white;
+position:absolute;
+}
+
+.section{
+display:none;
+margin-top:20px;
+}
+
+select,input{
+width:90%;
+padding:12px;
+margin-top:15px;
+border-radius:12px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+#submit{
+margin-top:25px;
+background:#ff3d6d;
+color:white;
+}
+
+#result{
+margin-top:20px;
+font-size:24px;
+color:#ff3d6d;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="container">
+
+<h1>❤️ Chaimaa ❤️</h1>
+
+<p>
+Chaimaa, lovar de mi vida...<br><br>
+Will you go on a date with me? 🌹
+</p>
+
+<div id="question">
+
+<button id="yes" onclick="yesAnswer()">YES ❤️</button>
+
+<button id="no">NO 😝</button>
+
+</div>
+
+<div class="section" id="form">
+
+<h3>📅 When are you free?</h3>
+
+<input type="date" id="date">
+
+<h3>🍔 What would you like to eat?</h3>
+
+<select id="food">
+<option value="">Choose...</option>
+<option>Burger 🍔</option>
+<option>Pizza 🍕</option>
+<option>Pasta 🍝</option>
+<option>Sushi 🍣</option>
+<option>Traditional Food 🥘</option>
+</select>
+
+<h3>🎉 Which activity?</h3>
+
+<select id="activity">
+<option value="">Choose...</option>
+<option>Partying 🪩</option>
+<option>Karting 🏎️</option>
+<option>Bowling 🎳</option>
+<option>Sand Boarding 🏜️</option>
+<option>Surfing 🌊</option>
+<option>Nature Trip 🌿</option>
+</select>
+
+<br>
+
+<button id="submit" onclick="finish()">
+Submit ❤️
+</button>
+
+<div id="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+// Floating Hearts
+
+const hearts=document.getElementById("hearts");
+
+for(let i=0;i<35;i++){
+
+const heart=document.createElement("span");
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"%";
+
+heart.style.animationDuration=(5+Math.random()*8)+"s";
+
+heart.style.fontSize=(15+Math.random()*25)+"px";
+
+heart.style.animationDelay=Math.random()*5+"s";
+
+hearts.appendChild(heart);
+
+}
+
+// Runaway NO Button
+
+const no=document.getElementById("no");
+
+function moveButton(){
+
+const x=Math.random()*(window.innerWidth-150);
+
+const y=Math.random()*(window.innerHeight-80);
+
+no.style.left=x+"px";
+no.style.top=y+"px";
+
+}
+
+no.addEventListener("mouseover",moveButton);
+no.addEventListener("touchstart",moveButton);
+
+// YES
+
+function yesAnswer(){
+
+confetti({
+particleCount:250,
+spread:150,
+origin:{y:0.6}
+});
+
+document.getElementById("question").style.display="none";
+document.getElementById("form").style.display="block";
+
+}
+
+// Finish
+
+function finish(){
+
+const date=document.getElementById("date").value;
+const food=document.getElementById("food").value;
+const activity=document.getElementById("activity").value;
+
+if(date==""||food==""||activity==""){
+alert("Choose everything first ❤️");
+return;
+}
+
+document.getElementById("result").innerHTML=
+
+`❤️ YAY! I can't wait to see you blessing! ❤️<br><br>
+📅 ${date}<br>
+🍔 ${food}<br>
+🎉 ${activity}<br><br>
+See you soon beautiful 💖`;
+
+}
+
+</script>
+
+</body>
+</html>
